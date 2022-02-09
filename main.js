@@ -48,7 +48,7 @@ function createPlayer(cls, obcls) {
     $player.appendChild($char);
 
 
-    const $arena = document.getElementsByClassName('arenas');
+    const $arena = document.querySelector('.arenas');
     $arena.appendChild($player);
 }
 
