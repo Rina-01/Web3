@@ -49,7 +49,7 @@ function createPlayer(cls, obcls) {
 
 
     const $arena = document.getElementsByClassName('arenas');
-    $arena.appendChild($player)
+    $arena.appendChild($player);
 }
 
 
