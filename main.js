@@ -62,22 +62,34 @@ $arena.appendChild(createPlayer(player2));
 function changeHP(player) {
     const $playerLife = document.querySelector('.player' + player.player + ' .life');
     player.hp -= 1 + Math.ceil(Math.random()*20);
-    console.log(player.hp);
-    $playerLife.style.width = player.hp + '%';
+
     if (player.hp < 0) {
-        $playerLife.style.width = 0;
-        $arena.appendChild(gameEnd(player));
+        player.hp = 0;
         $randomButton.disabled = true;
     }
+
+    $playerLife.style.width = player.hp + '%';
 }
 
-function gameEnd(player) {
+function gameEnd(name) {
     const $loseTitle = createElement('div', 'loseTitle');
-    $loseTitle. innerText = player.name + ' lose';
+    if (name) {
+        $loseTitle.innerText = name + ' win';
+    } else {
+        $loseTitle.innerText = 'draw';
+    }
     return $loseTitle;
 }
 
 $randomButton.addEventListener('click', function(){
     changeHP(player1);
     changeHP(player2);
+
+    if (player1.hp==0 && player2.hp==0) {
+        $arena.appendChild(gameEnd());
+    } else if (player1.hp==0 && player2.hp!=0) {
+        $arena.appendChild(gameEnd(player2.name));
+    } else if (player2.hp==0 && player1.hp!=0) {
+        $arena.appendChild(gameEnd(player1.name));
+    }
 });
