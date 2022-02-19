@@ -145,7 +145,7 @@ body {
 .life {
     background-color: #0431f9;
     height: 100%;
-    width: 90%;
+    width: 100%;
 }
 
 .name {
@@ -272,5 +272,17 @@ body {
     z-index: 1000;
     color: white;
     font-family: "Mortal Kombat 3";
+}
+
+.reloadWrap {
+    position: absolute;
+    top: 10%;
+    z-index: 1000;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.reloadWrap .button {
+    margin-top: 0;
 }
 

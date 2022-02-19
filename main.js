@@ -7,9 +7,10 @@ const player1 = {
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/sonya.gif',
     weapon: ['Excalibur', 'Arondight', 'Clarent', 'Crocea Mors', 'Beagalltach', 'Moralltach'], 
-    attack: function() {
-        console.log(this.name + ' Fight...');
-    }
+    attack: attack,
+    changeHP: changeHP,
+    elHP: elHP,
+    renderHP: renderHP
 };
 
 const player2 = {
@@ -18,9 +19,10 @@ const player2 = {
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
     weapon: ['Gae Bolg', 'Gei Bou', 'Gei Jarugu', 'Rhongomyniad', 'Gungner', 'Aeglos'],
-    attack: function() {
-        console.log(this.name + ' Fight...');
-    }
+    attack: attack,
+    changeHP: changeHP,
+    elHP: elHP,
+    renderHP: renderHP
 };
 
 function createElement(tag, classNam) {
@@ -59,31 +61,48 @@ function createPlayer(obcls) {
 $arena.appendChild(createPlayer(player1));
 $arena.appendChild(createPlayer(player2));
 
-function changeHP(player) {
-    const $playerLife = document.querySelector('.player' + player.player + ' .life');
-    player.hp -= 1 + Math.ceil(Math.random()*20);
+function attack() {
+    console.log(this.name + ' Fight...');
+}
 
-    if (player.hp < 0) {
-        player.hp = 0;
-        $randomButton.disabled = true;
-    }
+function changeHP(damage) {
+    this.hp -= damage;
+    if (this.hp < 0) {
+        this.hp = 0;
+    } 
+}
 
-    $playerLife.style.width = player.hp + '%';
+function elHP() {
+    return document.querySelector('.player' + this.player + ' .life');
+}
+
+function renderHP() {
+    this.elHP().style.width = this.hp + '%';
 }
 
 function gameEnd(name) {
     const $loseTitle = createElement('div', 'loseTitle');
     if (name) {
-        $loseTitle.innerText = name + ' win';
+        $loseTitle.innerText = name + ' wins';
     } else {
         $loseTitle.innerText = 'draw';
     }
     return $loseTitle;
 }
 
+function createReloadButton() {
+    const $realoadWrap = createElement('div', 'realoadWrap');
+    const $reloadButton = createElement('button', 'button');
+    $reloadButton.innerText = 'Reastart';
+    $realoadWrap.appendChild($reloadButton);
+    return $realoadWrap;
+}
+
 $randomButton.addEventListener('click', function(){
-    changeHP(player1);
-    changeHP(player2);
+    player1.changeHP(1 + Math.ceil(Math.random()*20));
+    player1.renderHP();
+    player2.changeHP(1 + Math.ceil(Math.random()*20));
+    player2.renderHP();
 
     if (player1.hp==0 && player2.hp==0) {
         $arena.appendChild(gameEnd());
@@ -92,4 +111,8 @@ $randomButton.addEventListener('click', function(){
     } else if (player2.hp==0 && player1.hp!=0) {
         $arena.appendChild(gameEnd(player1.name));
     }
-});
+    if (player1.hp==0 || player2.hp==0) {
+        $randomButton.disabled = true;
+    }
+})
+
