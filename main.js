@@ -91,10 +91,10 @@ function gameEnd(name) {
 }
 
 function createReloadButton() {
-    const $realoadWrap = createElement('div', 'realoadWrap');
+    const $reloadWrap = createElement('div', 'reloadWrap');
     const $reloadButton = createElement('button', 'button');
     $reloadButton.innerText = 'Reastart';
-    $realoadWrap.appendChild($reloadButton);
+    $reloadWrap.appendChild($reloadButton);
     return $reloadButton;
 }
 
