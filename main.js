@@ -95,7 +95,7 @@ function createReloadButton() {
     const $reloadButton = createElement('button', 'button');
     $reloadButton.innerText = 'Reastart';
     $realoadWrap.appendChild($reloadButton);
-    return $realoadWrap;
+    return $reloadButton;
 }
 
 $randomButton.addEventListener('click', function(){
@@ -113,6 +113,12 @@ $randomButton.addEventListener('click', function(){
     }
     if (player1.hp==0 || player2.hp==0) {
         $randomButton.disabled = true;
+
+        const $reloadButton = createReloadButton();
+        $reloadButton.addEventListener('click', function() {
+            window.location.reload();
+        });
+        $arena.appendChild($reloadButton);
     }
-})
+});
 
