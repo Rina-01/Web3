@@ -7,10 +7,10 @@ const player1 = {
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/sonya.gif',
     weapon: ['Excalibur', 'Arondight', 'Clarent', 'Crocea Mors', 'Beagalltach', 'Moralltach'], 
-    attack: attack,
-    changeHP: changeHP,
-    elHP: elHP,
-    renderHP: renderHP
+    attack,
+    changeHP,
+    elHP,
+    renderHP
 };
 
 const player2 = {
@@ -19,10 +19,10 @@ const player2 = {
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
     weapon: ['Gae Bolg', 'Gei Bou', 'Gei Jarugu', 'Rhongomyniad', 'Gungner', 'Aeglos'],
-    attack: attack,
-    changeHP: changeHP,
-    elHP: elHP,
-    renderHP: renderHP
+    attack,
+    changeHP,
+    elHP,
+    renderHP
 };
 
 function createElement(tag, classNam) {
@@ -93,8 +93,9 @@ function gameEnd(name) {
 function createReloadButton() {
     const $reloadWrap = createElement('div', 'reloadWrap');
     const $reloadButton = createElement('button', 'button');
-    $reloadButton.innerText = 'Reastart';
+    $reloadButton.innerText = 'Restart';
     $reloadWrap.appendChild($reloadButton);
+    $arena.appendChild($reloadWrap);
     return $reloadButton;
 }
 
@@ -118,7 +119,6 @@ $randomButton.addEventListener('click', function(){
         $reloadButton.addEventListener('click', function() {
             window.location.reload();
         });
-        $arena.appendChild($reloadButton);
     }
 });
 
