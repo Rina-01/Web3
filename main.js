@@ -13,3 +13,4 @@ $formFight.addEventListener('submit', function(e) {
     e.preventDefault();
     fight();
 });
+

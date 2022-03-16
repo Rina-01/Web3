@@ -37,3 +37,4 @@ export const playerLife = (player, damage) => {
     player.changeHP(damage);
     player.renderHP();
 }
+

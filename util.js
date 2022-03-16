@@ -15,21 +15,21 @@ export const createElement = (tag, classNam) => {
  * @param {object} obj - объект с данными игрока
  * @returns {HTMLElement} - переменная с элементом
  */
-export const createPlayer = (obj) => {
-    const $player = createElement('div', `player${obj.player}`);
+export const createPlayer = ({player, hp, name, img}) => {
+    const $player = createElement('div', `player${player}`);
 
     const $progres = createElement('div', 'progressbar');
     const $life = createElement('div', 'life');
-    $life.style.width = `${$obj.hp}%`;
+    $life.style.width = `${hp}%`;
     $progres.appendChild($life);
     const $name = createElement('div', 'name');
-    $name.innerText = obj.name;
+    $name.innerText = name;
     $progres.appendChild($name);
     $player.appendChild($progres);
 
     const $char = createElement('div', 'character');
     const $img = createElement('img');
-    $img.src = obj.img;
+    $img.src = img;
     $char.appendChild($img);
     $player.appendChild($char);
 
@@ -42,3 +42,4 @@ export const createPlayer = (obj) => {
  * @returns {number}
  */
 export const getRandom = (num) => Math.floor(Math.random()*num);    
+
