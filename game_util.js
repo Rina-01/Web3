@@ -1,6 +1,6 @@
 const $chat = document.querySelector('.chat');
 
-import {$arena} from './main.js';
+import {$arena} from './game.js';
 import {getRandom, createElement} from './util.js';
 
 const HIT = {
