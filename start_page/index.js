@@ -11,9 +11,7 @@ const createElement = (tag, className) => {
         } else {
             $tag.classList.add(className);
         }
-
     }
-
     return $tag;
 }
 
@@ -66,6 +64,7 @@ async function init() {
             setTimeout(() => {
                 // TODO: Здесь должен быть код который перенаправит вас на ваше игровое поле...
                 //  Пример использования: window.location.pathname = 'arenas.html';
+                window.location.pathname = '../game_page/index.html';
             }, 1000);
         });
 

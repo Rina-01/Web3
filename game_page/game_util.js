@@ -114,7 +114,7 @@ export const enemyAttack = async ({hit, defence}) => {
                 defence,
             })
         }).then(res => res.json());
-    return fight;
+    return JSON.parse(fight);
 }
 
 export const playerAttack = ($formFight) => {

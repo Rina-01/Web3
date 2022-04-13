@@ -44,7 +44,7 @@ export class Player {
     }
 }
 
-export const player1 = new Player ({
+/* export const player1 = new Player ({
     player: 1,
     name: 'Saber',
     hp: 100,
@@ -53,7 +53,7 @@ export const player1 = new Player ({
     rootSelector: 'arenas'
 });
  
-/* export const player2 = new Player ({
+export const player2 = new Player ({
     player: 2,
     name: 'Lancer',
     hp: 100,

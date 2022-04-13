@@ -1,15 +1,24 @@
 const $formFight = document.querySelector('.control');
 export const $arena = document.querySelector('.arenas');
 
-import {Player, player1} from './player.js';
+import Player from './player.js';
 self.importScripts('./game_util.js');
 
 export class Game {
-    getPlayers = async () => { return fetch('https://reactmarathon-api.herokuapp.com/api/mk/player/choose').then(res => res.json()); }
+    getPlayers = async () => { return fetch('https://reactmarathon-api.herokuapp.com/api/mk/players').then(res => res.json()); }
     start = () => {
         const players = await this.getPlayers();
+        
+        const p1 = JSON.parse(localStorage.getItem('player1'));
+        const p2 = JSON.parse(localStorage.getItem('player2'));
+        
+        const player1 = new Player({
+            ...p1,
+            player: 1,
+            rootSelector: 'arenas'
+        });
         const player2 = new Player({
-            ...JSON.parse(players),
+            ...p2,
             player: 2,
             rootSelector: 'arenas'
         });
@@ -24,7 +33,7 @@ export class Game {
     }
     fight = () => {
         const me = playerAttack($formFight);    // player1
-        const fight = JSON.parse(enemyAttack(me));    
+        const fight = await enemyAttack(me);    
         
         if (fight.player1.hit != fight.player2.defence) {
             player2.playerLife(fight.player1.value);
@@ -59,7 +68,7 @@ export class Game {
     
         const $reloadButton = createReloadButton();
         $reloadButton.addEventListener('click', function() {
-            window.location.reload();
+            window.location.pathname = '../start_page/index.html'
         });
     }
 }
