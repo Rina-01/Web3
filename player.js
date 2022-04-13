@@ -1,12 +1,12 @@
 import {createElement} from './util.js';
 
-class Player {
+export class Player {
     constructor(props) {
         this.player = props.player;
         this.name = props.name;
         this.hp = props.hp;
         this.img = props.img;
-        this.weapon = props.weapon;
+ //       this.weapon = props.weapon;
         this.selector = `player${this.player}`;
         this.rootSelector = props.rootSelector;
     }
@@ -49,11 +49,11 @@ export const player1 = new Player ({
     name: 'Saber',
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/sonya.gif',
-    weapon: ['Excalibur', 'Arondight', 'Clarent', 'Crocea Mors', 'Beagalltach', 'Moralltach'], 
+//    weapon: ['Excalibur', 'Arondight', 'Clarent', 'Crocea Mors', 'Beagalltach', 'Moralltach'], 
     rootSelector: 'arenas'
 });
-
-export const player2 = new Player ({
+ 
+/* export const player2 = new Player ({
     player: 2,
     name: 'Lancer',
     hp: 100,
@@ -61,4 +61,5 @@ export const player2 = new Player ({
     weapon: ['Gae Bolg', 'Gei Bou', 'Gei Jarugu', 'Rhongomyniad', 'Gungner', 'Aeglos'], 
     rootSelector: 'arenas'
 });
+*/
 

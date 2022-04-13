@@ -97,14 +97,24 @@ export const generateLogs = (type, playerAttack, playerDefence, damage, hp) => {
     $chat.insertAdjacentHTML('afterbegin', `<p>${text}</p>`);
 }
 
-export const enemyAttack = () => {
-    const hit = ATTACK[getRandom(3)];
+
+export const enemyAttack = async ({hit, defence}) => {
+/*    const hit = ATTACK[getRandom(3)];
     const defence = ATTACK[getRandom(3)];
     return {
         value: getRandom(HIT[hit]),
         hit,
         defence
     }
+    */
+    const fight = fetch('http://reactmarathon-api.herokuapp.com/api/mk/player/fight', {
+            method: 'POST',
+            body: JSON.stringify({
+                hit,
+                defence,
+            })
+        }).then(res => res.json());
+    return fight;
 }
 
 export const playerAttack = ($formFight) => {
@@ -115,7 +125,6 @@ export const playerAttack = ($formFight) => {
     };
     for (let i of $formFight) {
         if (i.checked && i.name === 'hit') {
-            me.value = getRandom(HIT[i.value]);
             me.hit = i.value;
         }
         if (i.checked && i.name === 'defence') {

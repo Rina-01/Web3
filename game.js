@@ -1,11 +1,19 @@
 const $formFight = document.querySelector('.control');
 export const $arena = document.querySelector('.arenas');
 
-import {player1, player2} from './player.js';
+import {Player, player1} from './player.js';
 self.importScripts('./game_util.js');
 
 export class Game {
+    getPlayers = async () => { return fetch('https://reactmarathon-api.herokuapp.com/api/mk/player/choose').then(res => res.json()); }
     start = () => {
+        const players = await this.getPlayers();
+        const player2 = new Player({
+            ...JSON.parse(players),
+            player: 2,
+            rootSelector: 'arenas'
+        });
+
         player1.createPlayer();
         player2.createPlayer();
         generateLogs('start', player1.name, player2.name);
@@ -16,16 +24,17 @@ export class Game {
     }
     fight = () => {
         const me = playerAttack($formFight);    // player1
-        const enemy = enemyAttack();    // player2
-        if (me.hit != enemy.defence) {
-            player2.playerLife(me.value);
-            generateLogs('hit', player1.name, player2.name, me.value, player2.hp);
+        const fight = JSON.parse(enemyAttack(me));    
+        
+        if (fight.player1.hit != fight.player2.defence) {
+            player2.playerLife(fight.player1.value);
+            generateLogs('hit', player1.name, player2.name, fight.player1.value, player2.hp);
         } else {
             generateLogs('defence', player1.name, player2.name);
         }
-        if (enemy.hit != me.defence) {
-            player1.playerLife(enemy.value);
-            generateLogs('hit', player2.name, player1.name, enemy.value, player1.hp);
+        if (fight.player2.hit != fight.player1.defence) {
+            player1.playerLife(fight.player2.value);
+            generateLogs('hit', player2.name, player1.name, fight.player2.value, player1.hp);
         } else {
             generateLogs('defence', player2.name, player1.name);
         }
